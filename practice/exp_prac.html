@@ -9,15 +9,6 @@
 </head>
 <body></body> 
 
-<?php
-    $post_data = json_decode(file_get_contents('php://input'), true);
-    // the directory "data" must be writable by the server 
-    $name = "data/" .$post_data['prac_rt_exp'].".csv";
-    $data = $post_data['prac_onexp'];
-    // write the file to disk
-    file_put_contents($name, $data);
-?>
-
 <script>
 
     /* create timeline */
