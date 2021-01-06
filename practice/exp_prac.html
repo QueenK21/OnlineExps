@@ -92,13 +92,6 @@
     // log data to console in json format
     console.log(interaction_data.json()); 
 
-    function saveData(name, data){
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'write_data.php'); // 'write_data.php' is the path to the php file described above  <?php ?> 
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify({filename: name, filedata: data}));
-    }
-
     /* start the experiment */
     jsPsych.init({
       timeline: timeline,
