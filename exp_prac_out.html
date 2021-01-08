@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+<!DOCTYPE html> // tell web-browser that this is html document. helps browser render things smoothly  
 <html>
-<head>
+<head> // tell where we can find the load files to create the experiment 
     <title>My experiment</title>
-    <script src="jsPsych/jspsych.js"></script>
+    <script src="jsPsych/jspsych.js"></script> // js  
     <script src="jsPsych/plugins/jspsych-html-keyboard-response.js"></script>
     <script src="jsPsych/plugins/jspsych-image-keyboard-response.js"></script>
     <link href="jsPsych/css/jspsych.css" rel="stylesheet" type="text/css">
@@ -17,7 +17,9 @@
     /* define welcome message trial */
     var welcome = {
       type: "html-keyboard-response",
-      stimulus: "Welcome to the experiment. Press any key to begin."
+      stimulus: "<p>Welcome to the experiment.</p>" +
+		"<p>This is a 'reactiontime tutorial' from jspsych.org.</p>"+
+		"<p> Press any key to begin.</p>"
     };
     timeline.push(welcome);
 
