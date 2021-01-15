@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Gabor practice</title>
+	<script src="../jsPsych/jspsych.js"></script>
+	<script src="../jsPsych/plugins/jspsych-html-keyboard-response.js"></script>
+	<script src="../jsPsych/plugins/jspsych-image-keyboard-response.js"</script>
+	<script src="../gabor-patch-generator/numeric.min.js"</script>
+	<script src="../gabor-patch-generator/jquery-min.js" type="text/javascript"></script>
+	<script src="../gabor-patch-generator/jquery-ui.min.js"></script>
+	<script src="../gabor-patch-generator/gab.js"></script>
+	<link href="..jsPsych/css/jspsych.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+</body>
+
+<script>
+
+	/* create timeline*/
+	var timeline = [];
+
+	/* define welcome message tiral */
+	var welcome = {
+		type: "html-keyboard-response",
+		stimulus: "<p>Welcome to the exerpiment.</p><p>Press any key to begin.</p>"
+	}
+	timeline.push(welcome);
+
+	/* instruction */
+	var instructions = {
+		type:"html-keyboard-response",
+		stimulus:"<p>In this experiment, a randomly tilted Gabor patch will appear in the center.</p>"+
+			"<p>If the Gabor patch was tilted in <b>counter-clockwise</b> from vertical meridian,</p>"+
+			"<p>press the letter <b>'F'</b> on the keyboard.</p>"+
+			"<p>If the Gabor patch was tilted in <b>clockwise</b> from vertical meridian,</p<"+
+			"<p>press the letter <b>'j'</b> on the keyboard.</p>"+
+			"<div style='width:700px;>"+
+			"<div style='float: left;'><img src='img/gabor_ccw.png'></img>"+
+			"<p class='small'><strong>Press the 'F' key</strong></p></div>"+
+			"<div class='float: right;'><img src=img/gabor_cw.png'></img>"+
+			"<p class='small'><strong>Press the J key</strong></p></div>"+
+			"</div>"+
+			"<p>Press any key to begin.</p>",
+		post_trial_gap: 2000
+	};
+	timeline.push(instructions);
+	
+	$(function(){
+		$(
+
+
+	/* test trials*/ 
+	var test_strumuli=[
+	];
+
+
+</script>
+
+</html>
