@@ -40,10 +40,10 @@ meshgrid = function(gx, gy){
         y_array_new = y_array.map(value => value - ((1+gy)/2)); 
     }
     for (i = 0; i < gy; i++){
-        mx[i].push = x_array_new; 
+        mx.push(x_array_new); 
     }
     for (j = 0; j < gy; j++){
-        my[j].push = y_array_new; 
+        my.push(y_array_new); 
     }
     my = math.transpose(my); 
     return [mx, my]; 
