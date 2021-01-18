@@ -8,7 +8,7 @@ mk_grating = function(pixelmap, freq, phase){
 /*make base grid with rotation*/ 
 base_mapping = function(mx, my, tilt){
     var rx, ry;
-    if (typeof tilt === 'undefined' || 'null'){
+    if (typeof tilt === 'undefined' || tilt === 'null'){
         tilt = 0; 
     }
     if (tilt%360 == 0){
