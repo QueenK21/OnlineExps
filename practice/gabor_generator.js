@@ -1,8 +1,10 @@
-var base_mapping, meshgrid, mk_gabor, mk_envelope, mk_grating, mk_gaussian;  
+var base_mapping, meshgrid, mk_gabor, map_radial, mk_grating, mk_gaussianEnvelope;  
 
 /*make grid for grating*/ 
 meshgrid = function(gx, gy){
-    var mx, my, x_array, x_array_new, y_array, y_array_new;
+    var mx = [];
+    var my = []; 
+    var x_array, x_array_new, y_array, y_array_new;
     x_array = math.range(1, gx, true);
     x_array_new = x_array.map(value => value - ((1+gx)/2)); 
     if (typeof gy === 'undefined' || gy === 'null'){
@@ -54,7 +56,7 @@ mk_grating = function(rx, freq, phase){
     return grating; 
 }
 
-mk_envelope = function(rx, ry, env_ratio, env_tilt){
+map_radial = function(rx, ry, env_ratio, env_tilt){
     var ecc, sum, rx_square, ry_square; 
     if (typeof env_tilt === 'undefined' || env_tilt === 'null'){
         env_tilt = 0; 
@@ -69,10 +71,30 @@ mk_envelope = function(rx, ry, env_ratio, env_tilt){
     return ecc; 
 }
 
-mk_gaussian = function(ecc, env_sd){
-    //matlab: gaussianmat = exp(-.5*(ecc/sd).^2); 
+mk_gaussianEnvelope = function(ecc, env_sd){
+    var gaussian_temp, gaussianEnvelope 
+    gaussian_temp = ecc.map(value=>Math.pow(value/sd,2)*-0.5);
+    gaussianEnvelope = mk_gaussian.map(value=>Math.exp(value));
+    return gaussianEnvelope; 
 }
 
+mk_gabor = function(grating, gaussianEnvelope){
+    var gabor_temp = [];
+    var gabor; 
+    for (var i=0; i < grating.length; i++){
+        gabor_temp[i]=[]; 
+        for (var j=0; j < grating.length; j++){
+            gabor_temp[i].push(grating[i][j]*gaussianEnvelope[i][j] + (1-gaussianEnvelope[i][j])*255);
+        }
+    }
+    gabor = Math.round(gabor_temp); 
+    return gabor; 
+}
+
+/*save_image*/
+ 
+
+/*additional function to use*/ 
 function addvector(a,b){
     return a.map((e,i) => e + b[i]);
 }
