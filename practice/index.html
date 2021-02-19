@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+		<title>gabor generating test</title>
+        <script src="../jsPsych/jspsych.js"></script>
+        <script src="../jsPsych/plugins/jspsych-html-keyboard-response.js"></script>
+        <script src="../jsPsych/plugins/jspsych-image-keyboard-response.js"></script>
+        <link href="../jsPsych/css/jspsych.css" rel="stylesheet" type="text/css">
+        <script src="gabor_generator.js"></script>
+    </head>
+    <body></body>
+
+    <script>
+    /* create timeline */
+    var timeline = [];
+
+    /* test trial */
+    var test = {
+        type: "html-keyboard-response",
+        stimulus: "Welcome. Press any key to generate Gabor Patch", 
+        post_trial_gap: 1000,
+    };
+    timeline.push(test);
+
+    /* start the experiment */
+    jsPsych.init({
+      timeline: timeline,
+      on_finish: function(){ // 이 부분 기능 체크
+          jsPsych.data.displayData();
+      }
+    });
+
+    gabor = mk_gabor(40,undefined,128,0.3,0.2,undefined,undefined,0.4,undefined,undefined);
+    document.body.appendChild(gabor);
+
+    </script>
+</html>
