@@ -5,7 +5,7 @@
     <script src="../jsPsych/jspsych.js"></script>
     <script src="../jsPsych/plugins/jspsych-html-keyboard-response.js"></script>
     <script src="../jsPsych/plugins/jspsych-image-keyboard-response.js"></script>
-    <script src="../jspsych/plugins/jspsych-fullscreen.js"></script>
+    <script src="../jsPsych/plugins/jspsych-fullscreen.js"></script>
     <link href="../jsPsych/css/jspsych.css" rel="stylesheet" type="text/css">
 </head>
 <body></body> 
@@ -60,7 +60,7 @@
             return jsPsych.randomization.sampleWithoutReplacement([250, 500, 750,
                 1000, 1250, 1500, 1750, 2000], 1)[0];
         data: {test_part: 'fixation'}
-        },
+        }
     }
 
     var test = {
@@ -69,7 +69,7 @@
         choices: ['f', 'j'],
         data: jsPsych.timelineVariable('data'),
         on_finish: function(data){
-            data.correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(data.correct_response);
+            data.correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(data.correct_response)
         }
     }
     var test_procedure = {
