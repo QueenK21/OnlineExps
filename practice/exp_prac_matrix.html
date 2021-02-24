@@ -48,37 +48,65 @@
     timeline.push(instructions);
 
     /* test trials */
-    var test_stimuli = [
-        {stimulus: "img/blue.png", data: {test_part: 'test', correct_response:'f'}},
-        {stimulus: "img/orange.png", data: {test_part: 'test', correct_response:'j'}}
-    ];
-    var fixation = {
-        type: 'html-keyboard-response',
-        stimulus: '<div style="font-size:60px;">+</div>',
-        choices: jsPsych.NO_KEYS,
-        trial_duration: function(){
-            return jsPsych.randomization.sampleWithoutReplacement([250, 500, 750,
-                1000, 1250, 1500, 1750, 2000], 1)[0];
-        data: {test_part: 'fixation'}
-        },
-    }
+    var stim = ["img/blue.png", "img/orange.png"];
 
-    var test = {
-        type: 'image-keyboard-response',
-        stimulus: jsPsych.timelineVariable('stimulus'),
-        choices: ['f', 'j'],
-        data: jsPsych.timelineVariable('data'),
-        on_finish: function(data){
-            data.correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(data.correct_response);
+    //var test = {
+    //    type: 'image-keyboard-response',
+    //    stimulus: jsPsych.timelineVariable('stimulus'),
+    //    choices: ['f', 'j'],
+    //    data: jsPsych.timelineVariable('data'),
+    //    on_finish: function(data){
+    //        data.correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(data.correct_response);
+    //    }
+    //}
+    //var test_procedure = {
+    //    timeline: [fixation, test],
+    //    timeline_variables: test_stimuli
+    //}
+    //timeline.push(test_procedure);
+
+    //*create matrix*//
+    var trial_length = 10; 
+    var cond = [];
+    for (var i=0; i<10; i++){
+        cond[i] = [];
+        var duration = Math.floor(Math.random()*(2000-500)+500); //between 500~2000ms 
+        cond[i].push(i+1, duration);
+    }
+  
+    for (var k=0; k<cond.length; k++){
+        var fixation = {
+                type: 'html-keyboard-response',
+                stimulus: '<div style="font-size:60px;">+</div>',
+                choices: jsPsych.NO_KEYS,
+                trial_duration: cond[k][1],
+            }
+        if (cond[k][0] % 2 == 0) {//is even number
+            var test = {
+                type: 'image-keyboard-response',
+                stimulus: stim[0],
+                choices: ['f','j'],
+                data: {test_part:'test', correct_response:'j'},
+                on_finish: function(data){
+                   data.correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(data.correct_response);
+                }
+            }
+        } else {
+            var test = {
+                type: 'image-keyboard-response',
+                stimulus: stim[1],
+                choices: ['f','j'],
+                data: {test_part:'test', correct_response:'j'},
+                on_finish: function(data){
+                   data.correct = data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode(data.correct_response);
+                }
+            }
         }
+        var test_procedure = {
+            timeline: [fixation, test]
+        }
+        timeline.push(test_procedure);
     }
-    var test_procedure = {
-        timeline: [fixation, test],
-        timeline_variables: test_stimuli,
-        randomize_order: true,
-        repetitions: 5
-    }
-    timeline.push(test_procedure);
 
     timeline.push({
     type: 'fullscreen',
